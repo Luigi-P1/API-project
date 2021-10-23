@@ -5,6 +5,8 @@ import com.sparta.lp.northwind.nullGenerator;
 import com.sparta.lp.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/products/All/Raw")
+    @GetMapping("/products/All/SortedBy/ProductID")
     public List<ProductEntity> getAllProducts(){
         return productRepository.findAll();
     }
@@ -32,4 +34,20 @@ public class ProductController {
         return Optional.of(productEntity);
 
     }
+    @GetMapping("/Products/All/GroupBy/Categories")
+    @ResponseBody
+    public List<ProductEntity> productGroupedcategories(){
+        List<ProductEntity> products= productRepository.findAll();
+        List<ProductEntity> productsGrouped=new ArrayList<>();
+
+        for (int i=1;i<9;i++) {
+            for (ProductEntity productEntity: products) {
+                if (i==productEntity.getCategoryID()){
+                    productsGrouped.add(productEntity);
+                }
+            }
+        }
+        return productsGrouped;
+    }
+
 }
