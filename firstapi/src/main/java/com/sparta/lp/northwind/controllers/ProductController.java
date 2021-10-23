@@ -1,23 +1,18 @@
 package com.sparta.lp.northwind.controllers;
 
-import com.sparta.lp.northwind.entities.CustomerEntity;
 import com.sparta.lp.northwind.entities.ProductEntity;
 import com.sparta.lp.northwind.nullGenerator;
-import com.sparta.lp.northwind.repositories.CustomerRepository;
 import com.sparta.lp.northwind.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class ProductController {
-    private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     @Autowired
-    public ProductController(CustomerRepository customerRepository, ProductRepository productRepository) {
-        this.customerRepository = customerRepository;
+    public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
